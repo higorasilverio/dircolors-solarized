@@ -1,7 +1,7 @@
 import { ReturnLeadDto } from './dtos/return-lead.dto';
 import { CreateLeadDto } from './dtos/create-lead.dto';
 import { LeadsService } from './leads.service';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, ValidationPipe } from '@nestjs/common';
 
 @Controller('leads')
 export class LeadsController {
@@ -14,7 +14,7 @@ export class LeadsController {
 
   @Post()
   async createLead(
-    @Body() createLeadDto: CreateLeadDto,
+    @Body(ValidationPipe) createLeadDto: CreateLeadDto,
   ): Promise<ReturnLeadDto> {
     const lead = await this.leadsService.create(createLeadDto);
 
