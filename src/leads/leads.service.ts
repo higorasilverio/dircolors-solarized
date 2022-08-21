@@ -28,8 +28,7 @@ export class LeadsService {
     Object.assign(lead, createLead);
 
     try {
-      await lead.save();
-
+      await this.leadsRepository.save(lead);
       const newLead = new ReturnLeadDto(lead);
 
       return newLead;
