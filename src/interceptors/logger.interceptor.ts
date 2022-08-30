@@ -21,17 +21,14 @@ export class LoggerInterceptor implements NestInterceptor {
     const user = (req.body as any).fullName;
     const userEmail = user ? (req.body as any).email : null;
 
-    this.logger.info({
-      timestamp: new Date().toISOString(),
-      method: req.method,
-      route: req.route.path,
-      data: {
-        body: body,
-        query: req.query,
-        params: req.params,
-      },
-      from: req.ip,
-      leadProvidedBy: userEmail,
-    });
+    this.logger.info(
+      JSON.stringify({
+        timestamp: new Date().toISOString(),
+        method: req.method,
+        route: req.route.path,
+        data: body,
+        leadProvidedBy: userEmail,
+      }),
+    );
   }
 }
