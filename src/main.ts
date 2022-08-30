@@ -7,6 +7,6 @@ async function bootstrap() {
   const logger = WinstonModule.createLogger(winstonConfig);
   const app = await NestFactory.create(AppModule, { logger });
   app.enableCors();
-  await app.listen(8000);
+  await app.listen(3000);
 }
 bootstrap();

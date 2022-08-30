@@ -1,6 +1,21 @@
 version: '3'
 
 services:
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - '3000:3000'
+    container_name: node-api
+    restart: always
+    volumes:
+      - node-api-logs:/usr/src/node-api/logs:rw
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - pgsql
+
   pgsql:
     image: postgres:alpine
     ports:
@@ -12,6 +27,7 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: Admin@123
+      POSTGRES_DB: solar21
 
   adminer:
     image: adminer
@@ -20,4 +36,5 @@ services:
       - 8080:8080
 
 volumes:
+  node-api-logs:
   pg-data:
